@@ -15,13 +15,13 @@ license = "MIT"
 edition = "2018"
 
 [[bin]]
-banch = false
-path = "crates/fsai-starter"
+# banch = false
+path = "crates/fsai-starter/src/main.rs"
 name = "fsai"
 
-[[test]]
-name = "integration"
-path = "tests/tests.rs"
+# [[test]]
+# name = "integration"
+# path = "tests/tests.rs"
 
 [workspace]
 members = [
