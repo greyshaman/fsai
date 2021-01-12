@@ -7,6 +7,9 @@ version = "0.1.0"
 [[package]]
 name = "fsai-starter"
 version = "0.1.0"
+dependencies = [
+ "resource-unit",
+]
 
 [[package]]
 name = "resource-unit"
