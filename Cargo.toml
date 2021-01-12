@@ -1,0 +1,32 @@
+[package]
+name = "fsai"
+version = "0.1.0"  #:version
+authors = ["Sergey Reshetnikov <shaman@simmirra.com>"]
+description = """
+fsai is a file system analyser to optimize files allocation
+"""
+# TODO: documentation = ""
+# TODO: homepage
+# TODO: repository
+# TODO: readme = README.md"
+keywords = ["fs", "face-detection", "ai", "optimization"]
+categories = ["command-line-utilities", "categorization", "file-reallocation"]
+license = "MIT"
+edition = "2018"
+
+[[bin]]
+banch = false
+path = "crates/fsai-starter"
+name = "fsai"
+
+[[test]]
+name = "integration"
+path = "tests/tests.rs"
+
+[workspace]
+members = [
+  "crates/fsai-starter",
+  "crates/resource-unit",
+]
+
+[dependencies]
