@@ -1,0 +1,11 @@
+[package]
+name = "resource-manager"
+version = "0.1.1"
+authors = ["Sergey Reshetnikov <shaman@simmirra.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+derive_builder = "0.9.0"
+uuid = { version = "0.8", features = ["serde", "v4"] }
