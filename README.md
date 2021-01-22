@@ -1,5 +1,4 @@
-fsai
-----
+# fsai #
 
 The FSAI is a analytical tool for file system. Main idea is to check files allocation in specified
 or current directory and try propose new organization for them based on types and meta data. 
@@ -13,3 +12,12 @@ these aspects. Human minds can sort any files but when we have a thousands of
 files there is time waste task is not resolvable. Main idea to delegate to computer this "easy" task =).
 
 Right now this project in Startup state... When it will be help full I'll remove this line ;)
+
+## TODO ##
+
+1. Add FSResource able to generate own uuid id 
+2. Create tests for FSResource ID
+
+## QUESTIONS ##
+
+1. How use getters and setters in RUST's structs?
