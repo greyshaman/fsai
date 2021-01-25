@@ -15,9 +15,4 @@ Right now this project in Startup state... When it will be help full I'll remove
 
 ## TODO ##
 
-1. Add FSResource able to generate own uuid id 
-2. Create tests for FSResource ID
-
-## QUESTIONS ##
-
-1. How use getters and setters in RUST's structs?
+1. Create tests for FSResource ID
