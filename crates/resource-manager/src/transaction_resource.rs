@@ -36,24 +36,27 @@ impl TransactionResource {
     &self.amount
   }
 
-  pub fn set_amount(&mut self, amount: &Decimal) {
+  pub fn set_amount(&mut self, amount: &Decimal) -> &mut TransactionResource {
     self.amount = *amount;
+    self
   }
 
   pub fn currency(&self) -> &Currency {
     &self.currency
   }
 
-  pub fn set_currency(&mut self, currency: &Currency) {
+  pub fn set_currency(&mut self, currency: &Currency) -> &mut TransactionResource {
     self.currency = *currency;
+    self
   }
 
   pub fn description(&self) -> &str {
     &self.description
   }
 
-  pub fn set_description(&mut self, desc: &str) {
+  pub fn set_description(&mut self, desc: &str) -> &mut TransactionResource {
     self.description = String::from(desc);
+    self
   }
 }
 
@@ -74,5 +77,27 @@ mod tests {
     assert_eq!(resource.amount(), &Decimal::new(123, 2));
     assert_eq!(resource.currency(), &Currency::RUB);
     assert_eq!(resource.description(), &String::from("test transaction resource"));
+  }
+
+  #[test]
+  fn amount_setter_should_modify_resource() {
+    let mut resource = TransactionResource::new(
+      TransactionResourceParams {
+        amount: Some(Decimal::new(123, 2)),
+        currency: None,
+        description: Some(String::from("test transaction resource")),
+      }
+    );
+
+    assert_eq!(resource.amount(), &Decimal::new(123, 2));
+
+    resource.set_amount(&Decimal::new(12345678987654321, 4));
+
+    assert_eq!(resource.amount(), &Decimal::new(12345678987654321, 4));
+
+    assert_eq!(resource.set_amount(
+      &Decimal::new(112233445566778899, 2)).amount(), 
+      &Decimal::new(112233445566778899, 2)
+    );
   }
 }
