@@ -12,7 +12,3 @@ these aspects. Human minds can sort any files but when we have a thousands of
 files there is time waste task is not resolvable. Main idea to delegate to computer this "easy" task =).
 
 Right now this project in Startup state... When it will be help full I'll remove this line ;)
-
-## TODO ##
-
-1. Create tests for FSResource ID

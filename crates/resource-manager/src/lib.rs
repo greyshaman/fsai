@@ -6,10 +6,7 @@ mod fs_resource;
 mod transaction_resource;
 
 use crate::resource::Resource;
-use crate::transaction_resource::{TransactionResource, TransactionResourceBuilder};
 use std::sync::{Arc, Mutex};
-use rust_decimal::prelude::*;
-use iso_currency::Currency;
 
 pub struct ResourceManager {
   // TODO: channel to communicate with  other components
@@ -33,6 +30,8 @@ mod tests {
   use super::*;
   use iso_currency::Currency;
   use crate::resource::ResourceInfo;
+  use crate::transaction_resource::{TransactionResource, TransactionResourceParams};
+  use rust_decimal::prelude::*;
 
   #[test]
   fn create_manager() {
@@ -44,14 +43,14 @@ mod tests {
   #[test]
   fn add_resource() {
     let mut manager = ResourceManager::new();
+    let transaction_resource_params = TransactionResourceParams {
+      amount: Some(Decimal::new(123, 2)),
+      currency: Some(Currency::RUB),
+      description: Some(String::from("test transaction"))
+    };
     manager.add(Resource::new(
       ResourceInfo::TransactionResource(
-        TransactionResourceBuilder::default()
-          .amount(Decimal::new(123, 2))
-          .currency(Currency::RUB)
-          .description(String::from("test transaction"))
-          .build()
-          .unwrap()
+        TransactionResource::new(transaction_resource_params)
       )
     ));
 
