@@ -8,7 +8,6 @@ mod transaction_resource;
 use crate::resource::Resource;
 use std::sync::{Arc, Mutex};
 
-
 pub struct ResourceManager {
   // TODO: channel to communicate with  other components
   storage: Vec<Arc<Mutex<Resource>>>,
