@@ -69,6 +69,9 @@ impl Named for ResourceInfo {
 mod tests {
   use super::*;
   use crate::fs_resource::{FSTime, FSType, FSResourceBuilder};
+  use crate::transaction_resource::{TransactionResource, TransactionResourceParams};
+  use iso_currency::Currency;
+  use rust_decimal::prelude::*;
 
   #[test]
   fn create_fs_resource_unit() {
@@ -87,5 +90,21 @@ mod tests {
 
     assert_eq!("/path/to/test.file", unit.name());
     assert!(!unit.id().is_nil());
+  }
+
+  #[test]
+  fn resource_name_should_return_description_of_transaction_resource() {
+      let transaction_resource_params = TransactionResourceParams {
+        amount: Some(Decimal::new(123, 2)),
+        currency: Some(Currency::RUB),
+        description: Some(String::from("test transaction"))
+      };
+
+      let resource = Resource::new(ResourceInfo::TransactionResource(
+        TransactionResource::new(transaction_resource_params)
+      ));
+
+      assert_eq!(resource.name(), "test transaction");
+      assert!(!resource.id().is_nil());
   }
 }
