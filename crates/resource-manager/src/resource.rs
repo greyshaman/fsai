@@ -1,6 +1,7 @@
-use crate::fs_resource::FSResource;
-use uuid::Uuid;
 use std::time::SystemTime;
+use uuid::Uuid;
+use crate::fs_resource::FSResource;
+use crate::transaction_resource::TransactionResource;
 
 /// The Indetified trait collected functionality regarding unique idetificator 
 /// aka ID. Actualy to rich uniqueness we need some BIG number and we already have it
@@ -50,6 +51,7 @@ impl Resource {
 
 pub enum ResourceInfo {
   FSResource(FSResource),
+  TransactionResource(TransactionResource),
 }
 
 impl Named for ResourceInfo {
@@ -59,6 +61,7 @@ impl Named for ResourceInfo {
         Some(fs_path) => fs_path,
         None => ""
       }
+      ResourceInfo::TransactionResource(trans_data) => trans_data.description()
     }
   }
 }
