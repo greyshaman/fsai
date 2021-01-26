@@ -13,18 +13,27 @@ pub struct TransactionResourceParams {
   pub description: Option<String>,
 }
 
+impl Default for TransactionResource {
+  fn default() -> TransactionResource {
+    TransactionResource {
+      amount: Decimal::new(0, 2),
+      currency: Currency::RUB, // TODO: need to move it to some configuration
+      description: String::from("empty transaction"),
+    }
+  }
+}
 
 impl TransactionResource {
-  pub fn new(tr_args: TransactionResourceParams) -> TransactionResource {
-    let amount = match tr_args.amount {
+  pub fn new(params: TransactionResourceParams) -> TransactionResource {
+    let amount = match params.amount {
       Some(value) => value,
       None => Decimal::new(0, 2)
     };
-    let currency = match tr_args.currency {
+    let currency = match params.currency {
       Some(value) => value,
       None => Currency::RUB
     };
-    let description = match tr_args.description {
+    let description = match params.description {
       Some(value) => value,
       None => String::from("")
     };
@@ -99,5 +108,14 @@ mod tests {
       &Decimal::new(112233445566778899, 2)).amount(), 
       &Decimal::new(112233445566778899, 2)
     );
+  }
+
+  #[test]
+  fn default_function_should_create_instance_with_default_values() {
+      let resource = TransactionResource::default();
+
+      assert_eq!(resource.amount(), &Decimal::new(0, 2));
+      assert_eq!(resource.currency(), &Currency::RUB);
+      assert_eq!(resource.description(), &String::from("empty transaction"));
   }
 }
