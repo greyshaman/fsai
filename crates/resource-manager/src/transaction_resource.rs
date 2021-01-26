@@ -24,16 +24,16 @@ impl Default for TransactionResource {
 }
 
 impl TransactionResource {
-  pub fn new(tr_args: TransactionResourceParams) -> TransactionResource {
-    let amount = match tr_args.amount {
+  pub fn new(params: TransactionResourceParams) -> TransactionResource {
+    let amount = match params.amount {
       Some(value) => value,
       None => Decimal::new(0, 2)
     };
-    let currency = match tr_args.currency {
+    let currency = match params.currency {
       Some(value) => value,
       None => Currency::RUB
     };
-    let description = match tr_args.description {
+    let description = match params.description {
       Some(value) => value,
       None => String::from("")
     };
