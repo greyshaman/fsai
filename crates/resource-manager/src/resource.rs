@@ -68,23 +68,25 @@ impl Named for ResourceInfo {
 #[cfg(test)]
 mod tests {
   use super::*;
-  use crate::fs_resource::{FSTime, FSType, FSResourceBuilder};
+  use crate::fs_resource::{ FSType, FSResource};
   use crate::transaction_resource::{TransactionResource, TransactionResourceParams};
   use iso_currency::Currency;
   use rust_decimal::prelude::*;
+  use std::time::SystemTime;
 
   #[test]
   fn create_fs_resource_unit() {
     let unit = Resource::new(
       ResourceInfo::FSResource(
-        FSResourceBuilder::default()
-          .fs_type(FSType::File)
-          .path("/path/to/test.file")
-          .size(1u64)
-          .create_time(FSTime::default())
-          .modify_time(FSTime::default())
-          .build()
-          .unwrap()
+        {
+          let mut fs_res: FSResource = FSResource::default();
+          fs_res.set_fs_type(&FSType::File)
+            .set_path("/path/to/test.file")
+            .set_size(&1u64)
+            .set_create_time(&SystemTime::now())
+            .set_modify_time(&SystemTime::now());
+          fs_res
+        }
       )
     );
 
