@@ -1,6 +1,8 @@
 mod resource;
 mod fs_resource;
 mod transaction_resource;
+mod harvester;
+mod harvesters;
 
 use crate::resource::Resource;
 use std::sync::{Arc, Mutex};
