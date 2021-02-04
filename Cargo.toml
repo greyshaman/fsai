@@ -30,3 +30,4 @@ members = [
 ]
 
 [dependencies]
+clap = "2.33.3"

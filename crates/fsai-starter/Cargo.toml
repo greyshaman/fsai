@@ -10,3 +10,4 @@ edition = "2018"
 resource-manager = { path = "../resource-manager" }
 # ncurses-rs = "0.0.3"
 ncurses = "5.100.0"
+clap = "2.33.3"

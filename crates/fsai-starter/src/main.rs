@@ -1,43 +1,18 @@
-use std::fs;
-use std::fs::{Metadata, FileType};
-
+use clap::{Arg, App};
 
 fn main() -> std::io::Result<()> {
-    // 1. read current directory
-    let dir_path = ".";
+    let matches = App::new("FSAI")
+        .version("0.1.1")
+        .author("Sergey Reshetnikov <shaman@simmirra.com>")
+        .about("File System Analytic Interface")
+        .arg(Arg::with_name("directory")
+            .short("d")
+            .long("directory")
+            .takes_value(true)
+            .help("Specify directory name to analyze"))
+        .get_matches();
 
-    if let Ok(entries) = fs::read_dir(dir_path) {
-        for entry in entries {
-            // let mut metadata: Metadata;
-            if let Ok(entry) = entry {
-                if let Ok(metadata) = entry.metadata() {
-                    let f_type = if metadata.file_type().is_dir() {
-                        "Directory"
-                    } else if metadata.file_type().is_file() {
-                        "File"
-                    } else {
-                        "SymLink"
-                    };
-                    println!(
-                        "{} {:?} permissions: {:?}", 
-                        f_type,
-                        entry.path(), 
-                        metadata.permissions()
-                    );
-                } else {
-                    println!("Couldn't get metadata for {:?}", entry.path());
-                }
-            }
-        }
-    }
-
-    // for entry in fs::read_dir(".")? {
-    //     let dir_entry = entry?;
-    //     // 2. show file list
-    //     println!("current directory: {:?}", dir_entry.path());
-    //     println!("\\----> metadata: {:?}", dir_entry.metadata());
-    // }
+    let directory_name = matches.value_of("directory").unwrap_or(".");
+    println!("{} was specified as working directory", directory_name);
     Ok(())
 }
-
-// fn get_directory() {}
